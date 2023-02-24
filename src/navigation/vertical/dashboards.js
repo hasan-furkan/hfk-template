@@ -9,10 +9,10 @@ export default [
     badgeText: '2',
     children: [
       {
-        id: 'analyticsDash',
-        title: 'Analytics',
+        id: 'analyticsDash2',
+        title: 'Analytics2',
         icon: <HomeRoundedIcon size={12} />,
-        navLink: '/',
+        navLink: '/dashboard',
         permission: ["admin", "manager", "user"]
       },
     ]
