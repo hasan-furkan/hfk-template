@@ -27,7 +27,7 @@ export default [
         title: 'Analytics3',
         icon: <HomeRoundedIcon size={12} />,
         navLink: '/',
-        permission: ["admin", "manager"]
+        permission: ["admin", "manager", "user"]
       },
     ]
   }
