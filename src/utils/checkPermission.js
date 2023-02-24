@@ -6,7 +6,6 @@ export const checkPermissions = (userRole, itemPermissions) => {
 
     if (!userRole) {
         // Kullanıcı rolü belirtilmediyse, hiçbir menü öğesine erişemez
-        console.log("bu item kapali")
         return false;
     }
 
