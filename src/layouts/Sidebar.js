@@ -3,7 +3,7 @@ import { ProSidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
 import navigation from "../navigation/vertical/index"
 import {tokens} from "../theme";
-import {useTheme} from "@mui/material";
+import {Typography, useTheme} from "@mui/material";
 import Box from "@mui/material/Box";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import {checkPermissions} from "../utils/checkPermission"

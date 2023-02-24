@@ -8,8 +8,11 @@ import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchIcon from "@mui/icons-material/Search";
+import ReactCountryFlag from "react-country-flag";
+import {useTranslation} from "react-i18next";
 
 const Navbar = () => {
+    const { i18n } = useTranslation();
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const colorMode = useContext(ColorModeContext);
@@ -19,8 +22,8 @@ const Navbar = () => {
             {/* SEARCH BAR */}
             <Box
                 display="flex"
-                backgroundColor={colors.primary[400]}
-                borderRadius="3px"
+                borderRadius="8px"
+                border="1px solid"
             >
                 <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Search" />
                 <IconButton type="button" sx={{ p: 1 }}>
@@ -37,6 +40,29 @@ const Navbar = () => {
                         <LightModeOutlinedIcon />
                     )}
                 </IconButton>
+                <ReactCountryFlag
+                    countryCode="us"
+                    style={{
+                        marginTop: '8px',
+                        fontSize: '2em',
+                        cursor: 'pointer',
+                        marginRight: "2px"
+                    }}
+                    onClick={() => {
+                        i18n.changeLanguage('en');
+                    }}
+                />
+                <ReactCountryFlag
+                    countryCode="tr"
+                    style={{
+                        marginTop: '8px',
+                        fontSize: '2em',
+                        cursor: 'pointer',
+                    }}
+                    onClick={() => {
+                        i18n.changeLanguage('tr');
+                    }}
+                />
                 <IconButton>
                     <NotificationsOutlinedIcon />
                 </IconButton>
@@ -46,6 +72,7 @@ const Navbar = () => {
                 <IconButton>
                     <PersonOutlinedIcon />
                 </IconButton>
+
             </Box>
         </Box>
     );
