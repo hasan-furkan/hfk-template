@@ -9,6 +9,7 @@ import Navbar from "./layouts/Navbar"
 import {useState} from "react";
 import {Routes, Route} from "react-router-dom"
 import Dashboard from "./pages/dashboards/DefaultDashbord"
+import Example from "./pages/Example"
 import "./i18n"
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
               <Navbar setIsSidebar={setIsSidebar} />
             <Routes>
                 <Route path="/" element={<Dashboard />} />
+                <Route path="/example" element={<Example />} />
             </Routes>
             </main>
           </div>
