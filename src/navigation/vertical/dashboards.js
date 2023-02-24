@@ -12,19 +12,22 @@ export default [
         id: 'analyticsDash',
         title: 'Analytics',
         icon: <HomeRoundedIcon size={12} />,
-        navLink: '/'
+        navLink: '/',
+        permission: ["admin", "manager", "user"]
       },
       {
         id: 'analyticsDash2',
-        title: 'Analytics',
+        title: 'Analytics2',
         icon: <HomeRoundedIcon size={12} />,
-        navLink: '/'
+        navLink: '/',
+        permission: ["admin", "manager", "user"]
       },
       {
         id: 'analyticsDash3',
-        title: 'Analytics',
+        title: 'Analytics3',
         icon: <HomeRoundedIcon size={12} />,
-        navLink: '/'
+        navLink: '/',
+        permission: ["admin", "manager"]
       },
     ]
   }
