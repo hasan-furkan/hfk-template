@@ -3,16 +3,17 @@ import { ProSidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
 import navigation from "../navigation/vertical/index"
 import {tokens} from "../theme";
-import {useTheme} from "@mui/material";
+import {Toolbar, Typography, useTheme} from "@mui/material";
 import Box from "@mui/material/Box";
-import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import {checkPermissions} from "../utils/checkPermission"
+import logoLight from "../assets/images/logo/karanlıklogo9728.png"
+import { Link } from "react-router-dom"
 
 const Sidebar = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const [isCollapsed, setIsCollapsed] = useState(false);
-    const [activeMenuItem, setActiveMenuItem] = useState(null);
+    const [activeMenuItem, setActiveMenuItem] = useState("/dashboard");
     const userRole = 'user'
 
     const handleMenuItemClick = (menuItem) => {
@@ -53,6 +54,9 @@ const Sidebar = () => {
             }}
         >
             <ProSidebar collapsed={isCollapsed}>
+                <Toolbar sx={{marginLeft: '20px'}}>
+                    <img src={logoLight} alt=""/>
+                </Toolbar>
                 <Menu iconShape="square" style={{
                     margin: "10px 0 20px 0",
                     color: colors.purple[500],
@@ -68,14 +72,15 @@ const Sidebar = () => {
                                 {nav.children &&
                                     nav.children.map((child) =>
                                         child.permission.includes(userRole) &&
-                                        <MenuItem
-                                            key={child.id}
-                                            disabled={!checkPermissions(userRole, nav.permission)}
-                                            active={activeMenuItem === child}
-                                            onClick={() => handleMenuItemClick(child)}
-                                        >
-                                            {child.title}
-                                        </MenuItem>
+                                       <Link to={child.navLink} key={child.id}>
+                                           <MenuItem
+                                               disabled={!checkPermissions(userRole, nav.permission)}
+                                               active={activeMenuItem === child}
+                                               onClick={() => handleMenuItemClick(child)}
+                                           >
+                                               {child.title}
+                                           </MenuItem>
+                                       </Link>
                                     )}
                             </SubMenu>
                         ) : (

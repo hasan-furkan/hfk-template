@@ -15,20 +15,6 @@ export default [
         navLink: '/',
         permission: ["admin", "manager", "user"]
       },
-      {
-        id: 'analyticsDash2',
-        title: 'Analytics2',
-        icon: <HomeRoundedIcon size={12} />,
-        navLink: '/',
-        permission: ["admin", "manager", "user"]
-      },
-      {
-        id: 'analyticsDash3',
-        title: 'Analytics3',
-        icon: <HomeRoundedIcon size={12} />,
-        navLink: '/',
-        permission: ["admin", "manager"]
-      },
     ]
   }
 ]
