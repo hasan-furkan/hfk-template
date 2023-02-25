@@ -181,7 +181,7 @@ export const themeSettings = (mode) => {
                 : {
                     // palette values for light mode
                     primary: {
-                        main: colors.primary[500],
+                        main: colors.purple[500],
                     },
                     secondary: {
                         main: colors.grey[500],
