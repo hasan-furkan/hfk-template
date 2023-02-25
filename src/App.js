@@ -8,6 +8,8 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import {useState} from "react";
 import "./i18n"
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
     const [theme, colorMode] = useMode();
@@ -18,6 +20,7 @@ function App() {
           <CssBaseline />
          <Routers />
         </ThemeProvider>
+          <ToastContainer />
       </ColorModeContext.Provider>
   );
 }

@@ -16,7 +16,7 @@ const Routers = () => {
                     <Route path={'/'} element={<PrivateRoute />}>
                         {login ? (
                             <>
-                                <Route  path={`/`} element={<Navigate to={`/`} />} />
+                                <Route path={`/`} element={<Navigate to={`/dashboard`} />} />
                             </>
                         ) : (
                             ''
