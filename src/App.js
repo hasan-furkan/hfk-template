@@ -10,6 +10,7 @@ import {useState} from "react";
 import "./i18n"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {HelmetProvider} from "react-helmet-async";
 
 function App() {
     const [theme, colorMode] = useMode();
@@ -18,7 +19,9 @@ function App() {
       <ColorModeContext.Provider value={colorMode}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-         <Routers />
+         <HelmetProvider>
+             <Routers />
+         </HelmetProvider>
         </ThemeProvider>
           <ToastContainer />
       </ColorModeContext.Provider>
