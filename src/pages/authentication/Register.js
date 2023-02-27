@@ -116,7 +116,11 @@ export default function Register() {
             </Box>
             <hr />
             <Box>
-              <Typography variant="h3" marginBottom={2} color={colors.grey[900]}>
+              <Typography
+                variant="h3"
+                marginBottom={2}
+                color={theme.palette.mode === 'dark' ? colors.light[300] : colors.grey[900]}
+              >
                 Welcome to HFK Theme
               </Typography>
               <Typography variant="body1" color={colors.grey[600]}>
@@ -198,33 +202,28 @@ export default function Register() {
                   </FormHelperText>
                 )}
               </FormControl>
-              <Box display="flex" justifyContent="space-between">
-                <Box>
-                  <FormControlLabel control={<Checkbox color="secondary" {...register('term')} />} label="Term" />
-                  {!!errors.term && (
-                    <FormHelperText error id="accountId-error">
-                      {errors?.term?.message}
-                    </FormHelperText>
-                  )}
-                </Box>
-                <Typography variant="body1" marginTop={1}>
-                  <Link to="/">Forgot password?</Link>
-                </Typography>
-              </Box>
+              <FormControl>
+                <FormControlLabel control={<Checkbox color="secondary" {...register('term')} />} label="Term" />
+                {!!errors.term && (
+                  <FormHelperText error id="accountId-error">
+                    {errors?.term?.message}
+                  </FormHelperText>
+                )}
+              </FormControl>
               <LoadingButton
                 loading={loading}
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 2, mb: 1 }}
                 color="secondary"
               >
                 Submit
               </LoadingButton>
               <Box display="flex" justifyContent="center">
-                <Link to="/" variant="body2">
+                <Link to="/login" variant="body2" style={{ color: colors.purple[400] }}>
                   {/* eslint-disable-next-line react/no-unescaped-entities */}
-                  Don't have an account? Sign Up
+                  You have account please login
                 </Link>
               </Box>
             </Box>
