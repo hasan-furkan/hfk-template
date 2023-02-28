@@ -178,7 +178,7 @@ export default function Login() {
               <Box display="flex" justifyContent="space-between">
                 <FormControlLabel control={<Checkbox value="remember" color="secondary" />} label="Remember me" />
                 <Typography variant="body1" marginTop={1}>
-                  <Link to="/" style={{ color: colors.purple[400] }}>
+                  <Link to="/forgot-password" style={{ color: colors.purple[400] }}>
                     Forgot password?
                   </Link>
                 </Typography>

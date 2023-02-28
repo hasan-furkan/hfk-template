@@ -28,3 +28,7 @@ export const validationLoginSchema = Yup.object().shape({
     .min(8, ({ min }) => `Password must be at least ${min} characters`)
     .required(i18n.t('validation.required')),
 });
+
+export const validationForgotPassSchema = Yup.object().shape({
+  email: Yup.string().email('Please enter valid email').required(i18n.t('validation.required')).label('Email'),
+});
