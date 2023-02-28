@@ -11,10 +11,13 @@ export const userSlice = createSlice({
     setUser: (state) => {
       state.user = true;
     },
+    setLogout: (state) => {
+      state.user = false;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setUser } = userSlice.actions;
+export const { setUser, setLogout } = userSlice.actions;
 
 export default userSlice.reducer;
