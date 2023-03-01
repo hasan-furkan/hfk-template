@@ -6,7 +6,6 @@ import authRoutes from './AuthRoutes';
 import LayoutRoutes from './LayoutRoutes';
 // setup fake backend
 
-// eslint-disable-next-line react/prop-types
 function Routers() {
   const isLoggedIn = useSelector((state) => state.user.user);
   return (
@@ -20,8 +19,11 @@ function Routers() {
                 <Route path="/login" element={<Navigate to="/dashboard" />} />
               </>
             ) : (
-              <Route path="/" element={<Navigate to="/login" />} />
+              <>
+                <Route path="/" element={<Navigate to="/login" />} />
+              </>
             )}
+
             <Route path={'/*'} element={<LayoutRoutes />} />
           </Route>
           {authRoutes.map(({ path, Component }, i) => (
