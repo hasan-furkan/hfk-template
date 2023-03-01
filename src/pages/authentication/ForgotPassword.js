@@ -6,8 +6,6 @@ import Typography from '@mui/material/Typography';
 import { Card, CardContent, useTheme } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import ReactCountryFlag from 'react-country-flag';
-import { useTranslation } from 'react-i18next';
 import { LoadingButton } from '@mui/lab';
 import { useState } from 'react';
 import { makeStyles } from '@mui/styles';
@@ -15,6 +13,7 @@ import { validationForgotPassSchema } from '../../utils/auth/formValidate';
 import { errorToastMessage, succesToastMessage } from '../../components/toasts';
 import HtmlHead from '../../components/html-head/HtmlHead';
 import { tokens } from '../../theme';
+import LanguageCountry from '../../components/languageCountry';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -30,7 +29,6 @@ export default function ForgotPassword() {
   const classes = useStyles();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const { i18n } = useTranslation();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -67,31 +65,7 @@ export default function ForgotPassword() {
       >
         <Card className={classes.root}>
           <CardContent>
-            <Box marginLeft={20} alignItems="center" justifyContent="center">
-              <ReactCountryFlag
-                countryCode="us"
-                style={{
-                  marginTop: '8px',
-                  fontSize: '2em',
-                  cursor: 'pointer',
-                  marginRight: '2px',
-                }}
-                onClick={() => {
-                  i18n.changeLanguage('en');
-                }}
-              />
-              <ReactCountryFlag
-                countryCode="tr"
-                style={{
-                  marginTop: '8px',
-                  fontSize: '2em',
-                  cursor: 'pointer',
-                }}
-                onClick={() => {
-                  i18n.changeLanguage('tr');
-                }}
-              />
-            </Box>
+            <LanguageCountry />
             <Box marginLeft={2}>
               <Typography
                 variant="h3"

@@ -20,7 +20,7 @@ function Navbar() {
   const theme = useTheme();
   tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(false);
   const dispatch = useDispatch();
 
   const handleClick = (event) => {
@@ -28,7 +28,7 @@ function Navbar() {
   };
 
   const handleClose = () => {
-    setAnchorEl(null);
+    setAnchorEl(undefined);
   };
 
   const handleLogout = () => {

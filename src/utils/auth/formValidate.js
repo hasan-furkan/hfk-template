@@ -32,3 +32,24 @@ export const validationLoginSchema = Yup.object().shape({
 export const validationForgotPassSchema = Yup.object().shape({
   email: Yup.string().email('Please enter valid email').required(i18n.t('validation.required')).label('Email'),
 });
+
+export const validationResetPasswordSchema = Yup.object().shape({
+  oldPassword: Yup.string()
+    .matches(/\w*[a-z]\w*/, 'Password must have a small letter')
+    .matches(/\w*[A-Z]\w*/, 'Password must have a capital letter')
+    .matches(/\d/, 'Password must have a number')
+    .min(8, ({ min }) => `Password must be at least ${min} characters`)
+    .required(i18n.t('validation.required')),
+  newPassword: Yup.string()
+    .matches(/\w*[a-z]\w*/, 'Password must have a small letter')
+    .matches(/\w*[A-Z]\w*/, 'Password must have a capital letter')
+    .matches(/\d/, 'Password must have a number')
+    .min(8, ({ min }) => `Password must be at least ${min} characters`)
+    .required(i18n.t('validation.required')),
+  newConfirmPassword: Yup.string()
+    .matches(/\w*[a-z]\w*/, 'Password must have a small letter')
+    .matches(/\w*[A-Z]\w*/, 'Password must have a capital letter')
+    .matches(/\d/, 'Password must have a number')
+    .min(8, ({ min }) => `Password must be at least ${min} characters`)
+    .required(i18n.t('validation.required')),
+});

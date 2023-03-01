@@ -7,20 +7,9 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import {
-  FormControl,
-  FormHelperText,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-  useTheme,
-} from '@mui/material';
-import { Visibility, VisibilityOff } from '@material-ui/icons';
+import { FormHelperText, useTheme } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import ReactCountryFlag from 'react-country-flag';
-import { useTranslation } from 'react-i18next';
 import { LoadingButton } from '@mui/lab';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -30,24 +19,21 @@ import HtmlHead from '../../components/html-head/HtmlHead';
 import { tokens } from '../../theme';
 import loginBg from '../../assets/images/auth/loginBg.jpg';
 import { setUser } from '../../redux/components/auth';
+import LanguageCountry from '../../components/languageCountry';
+import FormPassword from '../../components/form/FormPassword';
 
 export default function Login() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const { i18n } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
   const {
     register,
-    handleSubmit,
     formState: { errors },
+    control,
+    handleSubmit,
   } = useForm({
     resolver: yupResolver(validationLoginSchema),
   });
@@ -96,32 +82,7 @@ export default function Login() {
               alignItems: 'center',
             }}
           >
-            <Box>
-              <ReactCountryFlag
-                countryCode="us"
-                style={{
-                  marginTop: '8px',
-                  fontSize: '2em',
-                  cursor: 'pointer',
-                  marginRight: '2px',
-                }}
-                onClick={() => {
-                  i18n.changeLanguage('en');
-                }}
-              />
-              <ReactCountryFlag
-                countryCode="tr"
-                style={{
-                  marginTop: '8px',
-                  fontSize: '2em',
-                  cursor: 'pointer',
-                }}
-                onClick={() => {
-                  i18n.changeLanguage('tr');
-                }}
-              />
-            </Box>
-            <hr />
+            <LanguageCountry />
             <Box>
               <Typography
                 variant="h3"
@@ -147,34 +108,12 @@ export default function Login() {
                 error={!!errors.email}
                 helperText={errors?.email?.message}
               />
-              <FormControl sx={{ mt: 1 }} variant="outlined" fullWidth color="secondary">
-                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                <OutlinedInput
-                  id="outlined-adornment-password"
-                  type={showPassword ? 'text' : 'password'}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  label="Password"
-                  {...register('password')}
-                  error={!!errors.password}
-                  required
-                />
-                {!!errors.password && (
-                  <FormHelperText error id="accountId-error">
-                    {errors?.password?.message}
-                  </FormHelperText>
-                )}
-              </FormControl>
+              <FormPassword name="password" control={control} label="Password" />
+              {!!errors.password && (
+                <FormHelperText error id="accountId-error">
+                  {errors?.password?.message}
+                </FormHelperText>
+              )}
               <Box display="flex" justifyContent="space-between">
                 <FormControlLabel control={<Checkbox value="remember" color="secondary" />} label="Remember me" />
                 <Typography variant="body1" marginTop={1}>

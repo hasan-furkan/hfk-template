@@ -1,8 +1,10 @@
 import Dashboard from '../pages/dashboards/DefaultDashbord';
 import Example from '../pages/Example';
+import NotFound from '../pages/NotFound.JS';
 
 export const routes = [
   // dashboard
-  { path: `${process.env.PUBLIC_URL}/dashboard`, Component: <Dashboard /> },
-  { path: `${process.env.PUBLIC_URL}/example`, Component: <Example /> },
+  { path: `/dashboard`, Component: <Dashboard /> },
+  { path: `/example`, Component: <Example /> },
+  { path: `*`, Component: <NotFound /> },
 ];
