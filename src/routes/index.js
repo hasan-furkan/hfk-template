@@ -7,7 +7,7 @@ import LayoutRoutes from './LayoutRoutes';
 // setup fake backend
 
 function Routers() {
-  const isLoggedIn = useSelector((state) => state.user.user);
+  const isLoggedIn = true;
   return (
     <BrowserRouter basename="/">
       <Suspense>
