@@ -1,17 +1,24 @@
-import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import SvgIcons from '../../svg-icons/SvgIcons';
 
 export default [
   {
     id: 'dashboards',
     title: 'sideMenu.management',
-    icon: <HomeRoundedIcon size={20} />,
+    icon: <SvgIcons icon="home" size={20} />,
     badge: 'light-warning',
     badgeText: '2',
     children: [
       {
         id: 'analyticsDash2',
         title: 'sideMenu.userManagement',
-        icon: <HomeRoundedIcon size={12} />,
+        icon: <SvgIcons icon="home" size={20} />,
+        navLink: '/dashboard',
+        permission: ['admin', 'manager', 'user'],
+      },
+      {
+        id: 'analyticsDash2',
+        title: 'sideMenu.userManagement2',
+        icon: <SvgIcons icon="home" size={20} />,
         navLink: '/dashboard',
         permission: ['admin', 'manager', 'user'],
       },
