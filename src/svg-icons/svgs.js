@@ -17,5 +17,19 @@ const svgs = {
     '  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>\n' +
     '  <circle cx="12" cy="7" r="4" />\n' +
     '  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />\n',
+  lockOff:
+    '  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>\n' +
+    '  <rect x="5" y="11" width="14" height="10" rx="2" />\n' +
+    '  <circle cx="12" cy="16" r="1" />\n' +
+    '  <path d="M8 11v-4a4 4 0 0 1 8 0v4" />',
+  lockOn:
+    '  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>\n' +
+    '  <rect x="5" y="11" width="14" height="10" rx="2" />\n' +
+    '  <circle cx="12" cy="16" r="1" />\n' +
+    '  <path d="M8 11v-5a4 4 0 0 1 8 0" />',
+  logOut:
+    '  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>\n' +
+    '  <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />\n' +
+    '  <path d="M7 12h14l-3 -3m0 6l3 -3" />',
 };
 export default svgs;

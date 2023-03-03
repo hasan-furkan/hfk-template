@@ -1,13 +1,13 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import PrivateRoute from './PrivateRoute';
 import authRoutes from './AuthRoutes';
 import LayoutRoutes from './LayoutRoutes';
 // setup fake backend
 
 function Routers() {
-  const isLoggedIn = false;
+  const isLoggedIn = useSelector((state) => state.user.user);
   return (
     <BrowserRouter basename="/">
       <Suspense>
