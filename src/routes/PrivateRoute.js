@@ -4,7 +4,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 
 // eslint-disable-next-line react/prop-types
 function PrivateRoute() {
-  const isLoggedIn = true;
+  const isLoggedIn = false;
   return isLoggedIn ? <Outlet /> : <Navigate to="/login" />;
 }
 
