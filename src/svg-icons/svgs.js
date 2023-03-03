@@ -17,5 +17,15 @@ const svgs = {
     '  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>\n' +
     '  <circle cx="12" cy="7" r="4" />\n' +
     '  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />\n',
+  lockOff:
+    '  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>\n' +
+    '  <rect x="5" y="11" width="14" height="10" rx="2" />\n' +
+    '  <circle cx="12" cy="16" r="1" />\n' +
+    '  <path d="M8 11v-4a4 4 0 0 1 8 0v4" />',
+  lockOn:
+    '  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>\n' +
+    '  <rect x="5" y="11" width="14" height="10" rx="2" />\n' +
+    '  <circle cx="12" cy="16" r="1" />\n' +
+    '  <path d="M8 11v-5a4 4 0 0 1 8 0" />',
 };
 export default svgs;
