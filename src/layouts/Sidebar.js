@@ -20,7 +20,6 @@ function Sidebar() {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
-  console.log(navigation);
   return (
     <div className="flex">
       <div className="w-1/5 bg-light-300 dark:bg-black-300 h-screen overflow-y-auto scroll-smooth">
@@ -90,7 +89,7 @@ function Sidebar() {
           ))}
         </ul>
       </div>
-      <div className="flex-1 p-4 rounded-bg-lg">
+      <div className="flex-1 p-4 rounded-bg-lg dark:bg-black-300">
         <Outlet />
       </div>
     </div>

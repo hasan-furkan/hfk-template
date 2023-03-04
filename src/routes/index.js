@@ -23,7 +23,6 @@ function Routers() {
                 <Route path="/" element={<Navigate to="/login" />} />
               </>
             )}
-
             <Route path={'/*'} element={<LayoutRoutes />} />
           </Route>
           {authRoutes.map(({ path, Component }, i) => (
