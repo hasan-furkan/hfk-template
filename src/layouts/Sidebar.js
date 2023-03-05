@@ -89,7 +89,7 @@ function Sidebar() {
           ))}
         </ul>
       </div>
-      <div className="flex-1 p-4 rounded-bg-lg dark:bg-black-300">
+      <div className="flex-1 p-4 rounded-bg-lg bg-light-300 dark:bg-black-300">
         <Outlet />
       </div>
     </div>

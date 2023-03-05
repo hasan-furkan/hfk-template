@@ -1,11 +1,9 @@
 import { useDispatch } from 'react-redux';
 import ReactCountryFlag from 'react-country-flag';
-import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import SvgIcons from '../svg-icons/SvgIcons';
 import logo from '../assets/images/logo/karanlıklogo9728.png';
-import naviHorizontal from '../navigation/horizontal';
 import { setLogout } from '../redux/components/auth';
 import { setTheme } from '../redux/components/theme';
 
@@ -13,6 +11,12 @@ import { setTheme } from '../redux/components/theme';
 export default function Header({ setIsDarkMode, isDarkMode }) {
   const { i18n } = useTranslation();
   const dispatch = useDispatch();
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
 
   const handleModeToggle = () => {
     setIsDarkMode(!isDarkMode);
@@ -58,27 +62,35 @@ export default function Header({ setIsDarkMode, isDarkMode }) {
             }}
           />
         </li>
-        {naviHorizontal.map((icon, i) => (
-          <li role="presentation" key={i} className="py-2 hover:cursor-pointer dark:text-light-500">
-            <SvgIcons icon={icon.icon} />
-          </li>
-        ))}
+        <li role="presentation" className="py-2 hover:cursor-pointer dark:text-light-500">
+          <SvgIcons icon="home" />
+        </li>
         <li role="presentation" className="py-2 hover:cursor-pointer dark:text-light-500" onClick={handleModeToggle}>
           <SvgIcons icon="sun" />
         </li>
-        <li role="presentation" className="dark:text-light-500">
-          {/* eslint-disable-next-line react/button-has-type,jsx-a11y/no-interactive-element-to-noninteractive-role */}
-          <button className="border rounded-2xl p-2">
-            admin <br /> hsnfrkn32@gmail.com{' '}
-          </button>
-          {/* eslint-disable-next-line react/button-has-type,jsx-a11y/no-interactive-element-to-noninteractive-role */}
-        </li>
-        <li
-          role="presentation"
-          className="py-2 hover:cursor-pointer dark:text-light-500 relative z-10"
-          onClick={handleLogout}
-        >
-          <SvgIcons icon="logOut" />
+        <li role="presentation" className="relative py-2">
+          {/* eslint-disable-next-line react/button-has-type,jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
+          <span className="text-black-300 dark:text-light-500" onClick={handleToggle}>
+            <SvgIcons icon="dropDown" />
+          </span>
+          {isOpen && (
+            <div className="absolute top-full right-1 w-32 mt-2 dark:bg-light-500 text-gray-300 rounded-lg shadow-lg">
+              <ul className="py-4 px-2">
+                <li className="flex gap-2 m-2">
+                  <SvgIcons icon="home" /> Option 1
+                </li>
+                <li className="flex gap-2 m-2">
+                  <SvgIcons icon="home" />
+                  Option 2
+                </li>
+                <hr />
+                <li className="flex gap-2 m-2" role="presentation" onClick={handleLogout}>
+                  <SvgIcons icon="logOut" />
+                  Sign Out
+                </li>
+              </ul>
+            </div>
+          )}
         </li>
       </ul>
     </nav>
