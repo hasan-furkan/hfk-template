@@ -31,5 +31,8 @@ const svgs = {
     '  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>\n' +
     '  <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />\n' +
     '  <path d="M7 12h14l-3 -3m0 6l3 -3" />',
+  dropDown:
+    '  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>\n' +
+    '  <path d="M18 15l-6 -6l-6 6h12" transform="rotate(180 12 12)" />',
 };
 export default svgs;
