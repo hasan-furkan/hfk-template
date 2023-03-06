@@ -1,54 +1,42 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import { Card, CardContent, FormHelperText, useTheme } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { LoadingButton } from '@mui/lab';
-import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { makeStyles } from '@mui/styles';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { validationLoginSchema } from '../../utils/auth/formValidate';
 import { errorToastMessage, succesToastMessage } from '../../components/toasts';
 import HtmlHead from '../../components/html-head/HtmlHead';
-import { tokens } from '../../theme';
-import FormPassword from '../../components/form/FormPassword';
-import { validationResetPasswordSchema } from '../../utils/auth/formValidate';
+import { setUser } from '../../redux/components/auth';
+import SvgIcons from '../../svg-icons/SvgIcons';
 import LanguageCountry from '../../components/languageCountry';
-
-const useStyles = makeStyles(() => ({
-  root: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-  },
-}));
+import loginBg from '../../assets/images/auth/loginBg.jpg';
 
 export default function ResetPassword() {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
-  const classes = useStyles();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const {
-    control,
-    handleSubmit,
+    register,
     formState: { errors },
+    handleSubmit,
   } = useForm({
-    resolver: yupResolver(validationResetPasswordSchema),
+    resolver: yupResolver(validationLoginSchema),
   });
-
-  const onSubmit = (data, e) => {
-    e.preventDefault();
+  const onSubmit = (data) => {
     if (data) {
-      if (data.newPassword === data.newConfirmPassword) {
-        setLoading(true);
-        succesToastMessage('basarili');
-      } else {
-        errorToastMessage('parolalar eslesmiyor');
-      }
+      succesToastMessage('basarili');
+      dispatch(
+        setUser({
+          email: data.email,
+        }),
+      );
+      localStorage.setItem('user', JSON.stringify(data.email));
+      navigate('/dashboard');
     } else {
       errorToastMessage('basarisiz');
     }
@@ -60,72 +48,57 @@ export default function ResetPassword() {
   return (
     <>
       <HtmlHead title={title} description={description} />
-      <Box
-        sx={{
-          mx: 4,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          height: 'auto',
-        }}
-      >
-        <Card className={classes.root}>
-          <CardContent>
-            <LanguageCountry />
-            <Box>
-              <Typography
-                variant="h3"
-                marginBottom={2}
-                marginLeft={6}
-                color={theme.palette.mode === 'dark' ? colors.light[300] : colors.grey[900]}
-              >
-                Welcome to HFK Theme
-              </Typography>
-              <Typography variant="body1" color={colors.grey[600]} marginLeft={3}>
-                Please sign-in to your account and start the adventure
-              </Typography>
-            </Box>
-            <Box>
-              <Box component="form" noValidate onSubmit={handleSubmit(onSubmit)} sx={{ mt: 1 }}>
-                <FormPassword name="oldPassword" control={control} label="Old Password" />
-                {!!errors.oldPassword && (
-                  <FormHelperText error id="accountId-error">
-                    {errors?.oldPassword?.message}
-                  </FormHelperText>
-                )}
-                <FormPassword name="newPassword" control={control} label="New Password" />
-                {!!errors.newPassword && (
-                  <FormHelperText error id="accountId-error">
-                    {errors?.newPassword?.message}
-                  </FormHelperText>
-                )}
-                <FormPassword name="newConfirmPassword" control={control} label="New Confirm Password" />
-                {!!errors.newConfirmPassword && (
-                  <FormHelperText error id="accountId-error">
-                    {errors?.newConfirmPassword?.message}
-                  </FormHelperText>
-                )}
-                <LoadingButton
-                  loading={loading}
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
-                  color="secondary"
+      <section className="bg-grey-300 min-h-screen flex items-center justify-center">
+        {/* login container */}
+        <div className="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5 items-center">
+          {/* form */}
+          <div className="md:w-1/2 px-8 md:px-6">
+            <h2 className="font-bold text-2xl text-black-500">Reset Password</h2>
+            <p className="text-xs mt-4 text-[#002D74]">If you are already a member, easily log in</p>
+            <div className="mt-3 flex justify-center gap-4 mb-2">
+              <LanguageCountry />
+            </div>
+            <form action className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
+              <div className="relative">
+                <input
+                  className="p-2 rounded-xl border w-full"
+                  type={showPassword ? 'text' : 'password'}
+                  name="password"
+                  placeholder="Password"
+                  {...register('password', { required: true })}
+                />
+                <div
+                  role="presentation"
+                  className="absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer"
+                  onClick={handleClickShowPassword}
                 >
-                  Submit
-                </LoadingButton>
-                <Box display="flex" justifyContent="center">
-                  <Link to="/register" variant="body2" style={{ color: colors.purple[400] }}>
-                    {/* eslint-disable-next-line react/no-unescaped-entities */}
-                    Don't have an account? Sign Up
-                  </Link>
-                </Box>
-              </Box>
-            </Box>
-          </CardContent>
-        </Card>
-      </Box>
+                  <SvgIcons width={20} height={17} icon={`${showPassword ? 'lockOn' : 'lockOff'}`} />
+                </div>
+              </div>
+              {errors.password && <span className="text-red-500 ">{errors.password?.message}</span>}
+              {/* eslint-disable-next-line react/button-has-type */}
+              <button className="bg-purple-400 rounded-xl text-light-500 py-2 hover:scale-105 duration-300">
+                Login
+              </button>
+            </form>
+            <div className="mt-1 text-xs border-b border-[#002D74] py-4 text-[#002D74]">
+              <Link to="/forgot-password">Forgot your password?</Link>
+            </div>
+            <div className="mt-3 text-xs flex justify-between items-center text-[#002D74]">
+              {/* eslint-disable-next-line react/no-unescaped-entities */}
+              <p>Don't have an account?</p>
+              {/* eslint-disable-next-line react/button-has-type */}
+              <button className="py-2 px-5 bg-light-300 border rounded-xl hover:scale-110 duration-300">
+                <Link to="/register">Register</Link>
+              </button>
+            </div>
+          </div>
+          {/* image */}
+          <div className="md:block hidden w-1/2">
+            <img className="rounded-2xl" src={loginBg} alt="deneme" />
+          </div>
+        </div>
+      </section>
     </>
   );
 }
