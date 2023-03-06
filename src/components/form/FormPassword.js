@@ -1,51 +1,39 @@
-import { useController } from 'react-hook-form';
-import { FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput } from '@mui/material';
-import { Visibility, VisibilityOff } from '@material-ui/icons';
+import { useController, useForm } from 'react-hook-form';
 import { useState } from 'react';
 import * as React from 'react';
+import SvgIcons from '../../svg-icons/SvgIcons';
 
 // eslint-disable-next-line react/prop-types
-export default function FormPassword({ name, control, label, defaultValue = '', ...props }) {
+export default function FormPassword({ name, control, label }) {
+  const { register } = useForm();
   const {
-    field: { ref, ...inputProps },
-    fieldState: { invalid },
+    field: { ref },
   } = useController({
     name,
     control,
     rules: { required: true },
-    defaultValue,
   });
 
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
 
   return (
-    <FormControl sx={{ mt: 1 }} variant="outlined" fullWidth color="secondary" error={invalid}>
-      <InputLabel htmlFor={name}>{label}</InputLabel>
-      <OutlinedInput
-        id={name}
+    <div className="relative">
+      <input
+        className="p-2 rounded-xl border w-full"
         type={showPassword ? 'text' : 'password'}
-        endAdornment={
-          <InputAdornment position="end">
-            <IconButton
-              aria-label="toggle password visibility"
-              onClick={handleClickShowPassword}
-              onMouseDown={handleMouseDownPassword}
-              edge="end"
-            >
-              {showPassword ? <VisibilityOff /> : <Visibility />}
-            </IconButton>
-          </InputAdornment>
-        }
-        label={label}
-        {...inputProps}
-        {...props}
-        inputRef={ref}
+        name={name}
+        placeholder={label}
+        ref={register}
       />
-    </FormControl>
+      <div
+        role="presentation"
+        className="absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer"
+        onClick={handleClickShowPassword}
+      >
+        <SvgIcons width={20} height={17} icon={`${showPassword ? 'lockOn' : 'lockOff'}`} />
+      </div>
+    </div>
   );
 }
