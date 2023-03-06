@@ -1,116 +1,74 @@
 import * as React from 'react';
-import TextField from '@mui/material/TextField';
-import { Link, useNavigate } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import { Card, CardContent, useTheme } from '@mui/material';
+import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { LoadingButton } from '@mui/lab';
-import { useState } from 'react';
-import { makeStyles } from '@mui/styles';
-import { validationForgotPassSchema } from '../../utils/auth/formValidate';
+import { validationLoginSchema } from '../../utils/auth/formValidate';
 import { errorToastMessage, succesToastMessage } from '../../components/toasts';
 import HtmlHead from '../../components/html-head/HtmlHead';
-import { tokens } from '../../theme';
 import LanguageCountry from '../../components/languageCountry';
-
-const useStyles = makeStyles(() => ({
-  root: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400, // Card width
-  },
-}));
+import loginBg from '../../assets/images/auth/loginBg.jpg';
 
 export default function ForgotPassword() {
-  const classes = useStyles();
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
-
   const {
     register,
-    handleSubmit,
     formState: { errors },
+    handleSubmit,
   } = useForm({
-    resolver: yupResolver(validationForgotPassSchema),
+    resolver: yupResolver(validationLoginSchema),
   });
-  const onSubmit = (data, e) => {
-    e.preventDefault();
+  const onSubmit = (data) => {
     if (data) {
-      setLoading(true);
       succesToastMessage('basarili');
-      navigate('/login');
     } else {
       errorToastMessage('basarisiz');
     }
   };
 
-  const title = 'Forgot Password Page';
-  const description = 'Forgot Password Page';
+  const title = 'Login Page';
+  const description = 'Login Page';
 
   return (
     <>
       <HtmlHead title={title} description={description} />
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <Card className={classes.root}>
-          <CardContent>
-            <LanguageCountry />
-            <Box marginLeft={2}>
-              <Typography
-                variant="h3"
-                marginBottom={2}
-                color={theme.palette.mode === 'dark' ? colors.light[300] : colors.grey[900]}
-                sx={{ mt: 2, ml: 3 }}
-              >
-                Welcome to HFK Theme
-              </Typography>
-              <Typography variant="body1" color={colors.grey[600]}>
-                Please sign-in to your account and start the adventure
-              </Typography>
-            </Box>
-            <Box component="form" noValidate onSubmit={handleSubmit(onSubmit)} sx={{ mt: 1 }}>
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                label="Email Address"
-                autoComplete="email"
-                autoFocus
-                color="secondary"
-                {...register('email')}
-                error={!!errors.email}
-                helperText={errors?.email?.message}
+      <section className="bg-grey-300 min-h-screen flex items-center justify-center">
+        {/* login container */}
+        <div className="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5 items-center">
+          {/* form */}
+          <div className="md:w-1/2 px-8 md:px-6">
+            <h2 className="font-bold text-2xl text-black-500">Login</h2>
+            <p className="text-xs mt-4 text-[#002D74]">If you are already a member, easily log in</p>
+            <div className="mt-3 flex justify-center gap-4 mb-2">
+              <LanguageCountry />
+            </div>
+            <form action className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
+              <input
+                className="p-2  rounded-xl border"
+                type="email"
+                name="email"
+                placeholder="Email"
+                {...register('email', { required: true })}
               />
-              <LoadingButton
-                loading={loading}
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                color="secondary"
-              >
+              {errors.email && <span className="text-red-500 ">{errors.email?.message}</span>}
+              {/* eslint-disable-next-line react/button-has-type */}
+              <button className="bg-purple-400 rounded-xl text-light-500 py-2 hover:scale-105 duration-300">
                 Submit
-              </LoadingButton>
-              <Box display="flex" justifyContent="center">
-                <Link to="/login" variant="body2" style={{ color: colors.purple[400] }}>
-                  Go back to the login
-                </Link>
-              </Box>
-            </Box>
-          </CardContent>
-        </Card>
-      </Box>
+              </button>
+            </form>
+            <div className="mt-3 text-xs flex justify-between items-center text-[#002D74]">
+              {/* eslint-disable-next-line react/no-unescaped-entities */}
+              <p>Have account?</p>
+              {/* eslint-disable-next-line react/button-has-type */}
+              <button className="py-2 px-5 bg-light-300 border rounded-xl hover:scale-110 duration-300">
+                <Link to="/login">Login</Link>
+              </button>
+            </div>
+          </div>
+          {/* image */}
+          <div className="md:block hidden w-1/2">
+            <img className="rounded-2xl" src={loginBg} alt="deneme" />
+          </div>
+        </div>
+      </section>
     </>
   );
 }

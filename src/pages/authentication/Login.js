@@ -90,7 +90,7 @@ export default function Login() {
               </button>
             </form>
             <div className="mt-1 text-xs border-b border-[#002D74] py-4 text-[#002D74]">
-              <a href="#">Forgot your password?</a>
+              <Link to="/forgot-password">Forgot your password?</Link>
             </div>
             <div className="mt-3 text-xs flex justify-between items-center text-[#002D74]">
               {/* eslint-disable-next-line react/no-unescaped-entities */}
