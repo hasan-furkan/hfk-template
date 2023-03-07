@@ -12,7 +12,7 @@ function Routers() {
     <BrowserRouter basename="/">
       <Suspense>
         <Routes>
-          <Route path="/" element={<PrivateRoute />}>
+          <Route path="" element={<PrivateRoute />}>
             {isLoggedIn ? (
               <>
                 <Route path="/" element={<Navigate to="/dashboard" />} />
@@ -23,7 +23,7 @@ function Routers() {
                 <Route path="/" element={<Navigate to="/login" />} />
               </>
             )}
-            <Route path={'/*'} element={<LayoutRoutes />} />
+            <Route path="/*" element={<LayoutRoutes />} />
           </Route>
           {authRoutes.map(({ path, Component }, i) => (
             <Route path={path} element={Component} key={i} />

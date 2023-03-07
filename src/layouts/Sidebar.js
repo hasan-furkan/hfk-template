@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import 'react-pro-sidebar/dist/css/styles.css';
 import { Link, Outlet } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -20,6 +20,8 @@ function Sidebar() {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
+  useEffect(() => {}, [activeIndex, activeChildIndex]);
+
   return (
     <div className="flex">
       <div className="w-1/5 bg-light-300 dark:bg-black-300 h-screen overflow-y-auto scroll-smooth">
@@ -29,7 +31,7 @@ function Sidebar() {
               <div
                 role="presentation"
                 className={`${
-                  activeIndex === i
+                  activeIndex === d.id
                     ? 'bg-purple-400 text-light-500'
                     : 'text-black-500 hover:bg-purple-300 dark:text-light-500'
                 } flex items-center justify-between hover:bg-gray-200 cursor-pointer m-2 py-2 px-4 rounded-2xl`}

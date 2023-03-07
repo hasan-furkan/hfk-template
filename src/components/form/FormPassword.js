@@ -4,16 +4,7 @@ import * as React from 'react';
 import SvgIcons from '../../svg-icons/SvgIcons';
 
 // eslint-disable-next-line react/prop-types
-export default function FormPassword({ name, control, label }) {
-  const { register } = useForm();
-  const {
-    field: { ref },
-  } = useController({
-    name,
-    control,
-    rules: { required: true },
-  });
-
+export default function FormPassword({ name, label }) {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -25,7 +16,7 @@ export default function FormPassword({ name, control, label }) {
         type={showPassword ? 'text' : 'password'}
         name={name}
         placeholder={label}
-        ref={register}
+        ref
       />
       <div
         role="presentation"
