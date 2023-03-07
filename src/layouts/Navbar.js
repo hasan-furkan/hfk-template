@@ -71,12 +71,12 @@ export default function Header({ setIsDarkMode, isDarkMode }) {
           <SvgIcons icon="home" />
         </li>
         <li role="presentation" className="py-2 hover:cursor-pointer dark:text-light-500" onClick={handleModeToggle}>
-          <SvgIcons icon="sun" />
+          <SvgIcons icon={`${isDarkMode ? 'sun' : 'sunOff'}`} width={16} height={20} />
         </li>
-        <li role="presentation" className="relative">
+        <li role="presentation" className="relative cursor-pointer">
           {/* eslint-disable-next-line react/button-has-type,jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
           <span className="text-black-300 dark:text-light-500" onClick={handleToggle}>
-            <img src={avatar} className="inline-block h-9 w-9 rounded-full ring-2 ring-purple-400" alt="" />
+            <img src={avatar} className="inline-block h-8 w-8 rounded-full ring-2 ring-purple-400" alt="" />
           </span>
           {isOpen && (
             <div className="bg-light-300 text-black-500 absolute top-full right-1 w-56 mt-2 dark:bg-black-300 dark:text-light-500 rounded-lg shadow-lg">

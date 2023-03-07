@@ -9,7 +9,7 @@ export default [
     badgeText: '2',
     children: [
       {
-        id: 'analyticsDash2',
+        id: 'analyticsDash',
         title: 'sideMenu.userManagement',
         icon: <SvgIcons icon="home" size={20} />,
         navLink: '/dashboard',
