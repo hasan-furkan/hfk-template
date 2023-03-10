@@ -23,9 +23,9 @@ export default function Header({ setIsDarkMode, isDarkMode }) {
   };
 
   const handleModeToggle = () => {
+    dispatch(setTheme(!isDarkMode ? 'light' : 'dark'));
+    localStorage.setItem('theme', !isDarkMode ? 'light' : 'dark');
     setIsDarkMode(!isDarkMode);
-    dispatch(setTheme(isDarkMode ? 'dark' : 'light'));
-    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
   };
 
   const handleLogout = () => {
@@ -36,7 +36,7 @@ export default function Header({ setIsDarkMode, isDarkMode }) {
 
   useEffect(() => {}, [isDarkMode]);
   return (
-    <nav className="w-full bg-light-300 dark:bg-black-300 flex p-4 items-center justify-between">
+    <nav className="w-full bg-light-300 dark:bg-black-300 flex p-4 items-center justify-between sticky top-0">
       <div className="inline-flex space-x-2">
         <div className="h-8 w-auto">
           <img src={logo} alt="" className="ml-14 mt-3" />
@@ -71,7 +71,7 @@ export default function Header({ setIsDarkMode, isDarkMode }) {
           <SvgIcons icon="home" />
         </li>
         <li role="presentation" className="py-2 hover:cursor-pointer dark:text-light-500" onClick={handleModeToggle}>
-          <SvgIcons icon={`${isDarkMode ? 'sun' : 'sunOff'}`} width={16} height={20} />
+          <SvgIcons icon={`${!isDarkMode ? 'sunOff' : 'sun'}`} width={16} height={20} />
         </li>
         <li role="presentation" className="relative cursor-pointer">
           {/* eslint-disable-next-line react/button-has-type,jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}

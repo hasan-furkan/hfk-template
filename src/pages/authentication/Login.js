@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { validationLoginSchema } from '../../utils/auth/formValidate';
 import { errorToastMessage, succesToastMessage } from '../../components/toasts';
@@ -44,11 +44,19 @@ export default function Login() {
 
   const title = 'Login Page';
   const description = 'Login Page';
+  const theme = useSelector((state) => state.theme.theme);
+  console.log(theme);
 
   return (
     <>
       <HtmlHead title={title} description={description} />
-      <section className="bg-grey-300 min-h-screen flex items-center justify-center">
+      <section
+        className={`${
+          theme === 'dark'
+            ? 'bg-black-300 min-h-screen flex items-center justify-center'
+            : 'bg-grey-200 min-h-screen flex items-center justify-center'
+        }`}
+      >
         {/* login container */}
         <div className="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5 items-center">
           {/* form */}
