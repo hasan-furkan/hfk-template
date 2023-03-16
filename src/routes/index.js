@@ -4,13 +4,14 @@ import { useSelector } from 'react-redux';
 import PrivateRoute from './PrivateRoute';
 import authRoutes from './AuthRoutes';
 import LayoutRoutes from './LayoutRoutes';
+import DotLoading from '../components/loading/DotLoading';
 // setup fake backend
 
 function Routers() {
   const isLoggedIn = useSelector((state) => state.user.user);
   return (
     <BrowserRouter basename="/">
-      <Suspense>
+      <Suspense fallback={<DotLoading />}>
         <Routes>
           <Route path="" element={<PrivateRoute />}>
             {isLoggedIn ? (
