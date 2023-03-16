@@ -104,8 +104,8 @@ export default function Header({ setIsDarkMode, isDarkMode }) {
                       type: 'spring',
                       bounce: 0,
                       duration: 0.7,
-                      delayChildren: 0.3,
-                      staggerChildren: 0.05,
+                      delayChildren: 0.6,
+                      staggerChildren: 0.08,
                     },
                   },
                   closed: {

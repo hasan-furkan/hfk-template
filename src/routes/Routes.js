@@ -1,6 +1,7 @@
-import Dashboard from '../pages/dashboards/DefaultDashbord';
-import Example from '../pages/Example';
+import { lazy } from 'react';
 
+const Dashboard = lazy(() => import('../pages/dashboards/DefaultDashbord'));
+const Example = lazy(() => import('../pages/Example'));
 export const routes = [
   // dashboard
   { path: `/dashboard`, Component: <Dashboard /> },
