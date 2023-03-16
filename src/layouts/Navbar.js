@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import ReactCountryFlag from 'react-country-flag';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import { options } from './component/MenuItemDataComponent';
 import MenuItemComponent from './component/MenuItemComponent';
 import SvgIcons from '../svg-icons/SvgIcons';
@@ -10,6 +11,15 @@ import { setLogout } from '../redux/components/auth';
 import { setTheme } from '../redux/components/theme';
 import avatar from '../assets/images/avatars/avatar.jpg';
 import { succesToastMessage } from '../components/toasts';
+
+const itemVariants = {
+  open: {
+    opacity: 1,
+    y: 0,
+    transition: { type: 'spring', stiffness: 300, damping: 24 },
+  },
+  closed: { opacity: 0, y: 20, transition: { duration: 0.2 } },
+};
 
 // eslint-disable-next-line react/prop-types
 export default function Header({ setIsDarkMode, isDarkMode }) {
@@ -73,14 +83,43 @@ export default function Header({ setIsDarkMode, isDarkMode }) {
         <li role="presentation" className="py-2 hover:cursor-pointer dark:text-light-500" onClick={handleModeToggle}>
           <SvgIcons icon={`${!isDarkMode ? 'sunOff' : 'sun'}`} width={16} height={20} />
         </li>
-        <li role="presentation" className="relative cursor-pointer">
+        <motion.li className="relative cursor-pointer" whileTap={{ scale: 0.97 }} onClick={handleToggle}>
           {/* eslint-disable-next-line react/button-has-type,jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
-          <span className="text-black-300 dark:text-light-500" onClick={handleToggle}>
-            <img src={avatar} className="inline-block h-8 w-8 rounded-full ring-2 ring-purple-400" alt="" />
-          </span>
+          <motion.span className="text-black-300 dark:text-light-500">
+            <motion.img
+              transition={{ duration: 0.2 }}
+              style={{ originY: 0.55 }}
+              src={avatar}
+              className="inline-block h-8 w-8 rounded-full ring-2 ring-purple-400"
+              alt=""
+            />
+          </motion.span>
           {isOpen && (
             <div className="bg-light-300 text-black-500 absolute top-full right-1 w-56 mt-2 dark:bg-black-300 dark:text-light-500 rounded-lg shadow-lg">
-              <ul className="py-4 px-2">
+              <motion.ul
+                variants={{
+                  open: {
+                    clipPath: 'inset(0% 0% 0% 0% round 10px)',
+                    transition: {
+                      type: 'spring',
+                      bounce: 0,
+                      duration: 0.7,
+                      delayChildren: 0.3,
+                      staggerChildren: 0.05,
+                    },
+                  },
+                  closed: {
+                    clipPath: 'inset(10% 50% 90% 50% round 10px)',
+                    transition: {
+                      type: 'spring',
+                      bounce: 0,
+                      duration: 0.3,
+                    },
+                  },
+                }}
+                className="py-4 px-2"
+                style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
+              >
                 <li className="flex gap-2 m-2">
                   <img src={avatar} className="inline-block h-9 w-9 rounded-full ring-2 ring-purple-400" alt="" />
                   <div className="flex flex-col">
@@ -96,22 +135,28 @@ export default function Header({ setIsDarkMode, isDarkMode }) {
                       <hr />
                     </div>
                   ) : (
-                    <MenuItemComponent key={index} icon={option.icon} onClick={option.onClick} label={option.label} />
+                    <MenuItemComponent
+                      variants={itemVariants}
+                      key={index}
+                      icon={option.icon}
+                      onClick={option.onClick}
+                      label={option.label}
+                    />
                   );
                 })}
                 <hr />
-                <li
+                <motion.li
+                  variants={itemVariants}
                   className="flex gap-2 m-2 hover:bg-grey-200 p-1 cursor-pointer"
-                  role="presentation"
                   onClick={handleLogout}
                 >
                   <SvgIcons icon="logOut" />
                   Sign Out
-                </li>
-              </ul>
+                </motion.li>
+              </motion.ul>
             </div>
           )}
-        </li>
+        </motion.li>
       </ul>
     </nav>
   );
