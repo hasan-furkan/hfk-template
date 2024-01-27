@@ -48,7 +48,9 @@
     "sideMenu": {
       "management": "Management",
       "userManagement": "User Management",
-      "roleManagement": "Role Management"
+      "roleManagement": "Role Management",
+      "permissionManagement": "Permission Management",
+      "settings": "Settings"
     },
     "navbar": {
       "editProfile": "Profile",

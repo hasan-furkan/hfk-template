@@ -2,15 +2,15 @@ import SvgIcons from '../../svg-icons/SvgIcons';
 
 export default [
   {
-    id: 'example',
-    title: 'Example',
+    id: 'settings',
+    title: 'sideMenu.settings',
     icon: <SvgIcons icon="home" size={20} />,
     children: [
       {
         id: 'dtBasic',
-        title: 'Basic',
+        title: 'sideMenu.userManagement',
         icon: <SvgIcons icon="home" size={20} />,
-        navLink: '/example',
+        navLink: '/settings',
         permission: ['admin', 'manager', 'user'],
       },
     ],

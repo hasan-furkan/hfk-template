@@ -48,7 +48,9 @@
     "sideMenu": {
       "management": "Yönetim",
       "userManagement": "Kullanıcı Yönetimi",
-      "roleManagement": "Rol Yönetimi"
+      "roleManagement": "Rol Yönetimi",
+      "permissionManagement": "Yetki Yönetimi",
+      "settings": "Ayarlar"
     },
     "navbar": {
       "editProfile": "Profil",
